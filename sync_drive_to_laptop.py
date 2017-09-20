@@ -56,3 +56,5 @@ shutil.rmtree(os.path.expanduser("~/zim-notes"))
 # Restore zim
 print("=> Restore zim")
 shell("tar xf {} -C {}".format(tgz_filepath, os.path.expanduser("~")))
+# # print("=> update dotfiles")
+# subprocess.call("git pull", shell=True, cwd=os.path.expanduser("~/dev/dotfiles/"))
