@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import subprocess
+import os
+import re
 
 
 def shell(command, check_errors=True, cwd=None):
