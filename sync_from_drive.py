@@ -20,7 +20,7 @@ source_dir = args['<usb_key_path>']
 
 assert os.path.exists(source_dir) and os.path.isdir(source_dir)
 # Check files
-regexp = r'zim-notes_\d{8}\.[tgz,tar\.gz]'
+regexp = r'zim-notes_\d{8}(.*)?\.[tgz,tar\.gz]'
 backup_files = search_file(regexp, source_dir)
 assert backup_files, "Backup file not found in {}: {}".format(source_dir, regexp)
 usb_backup_filepath = sorted(backup_files, reverse=True)[0]  # Use newest one
