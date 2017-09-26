@@ -1,12 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import subprocess
 import os
 import re
 
 
-def shell(command, check_errors=True, cwd=None):
-    errors = subprocess.call(command, shell=True, cwd=cwd)
+def shell(command, check_errors=True, capture_output=False):
+    if capture_output:
+        errors = subprocess.call(command, shell=True, stdout=subprocess.DEVNULL)
+    else:
+        errors = subprocess.call(command, shell=True)
     if check_errors:
         assert not errors, errors
 
