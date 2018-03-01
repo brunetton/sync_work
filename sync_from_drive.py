@@ -27,6 +27,16 @@ def restore(stuff_dest_path, source_path):
     assert backup_files, "Backup file not found in {}: {}".format(source_path, regexp)
     backup_filepath = sorted(backup_files, reverse=True)[0]  # Use newest one
     print("=> Restore {} (using {}) ...".format(stuff_name, backup_filepath))
+    # Check that backup is not strangely old
+    date_match = re.search(regexp, os.path.basename(backup_filepath)).group(1)
+    time_delta = datetime.datetime.now() - datetime.datetime.strptime(date_match, '%Y%m%d-%H%M%S')
+    time_delta_minutes = time_delta.total_seconds() / 60
+    assert time_delta_minutes >= 0
+    if time_delta_minutes > 60:
+        answer = input("Warning: source file is older than one hour ({}).\nContinue anyway? (y/N): ".format(strfdelta(time_delta, '%D days %H:%M')))
+        if answer.lower() != 'y':
+            print("-> Cancelled")
+            exit()
     # Make local backup copy
     local_original_path = os.path.join(home_path, stuff_name)
     if os.path.exists(local_original_path):
