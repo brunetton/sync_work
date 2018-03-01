@@ -22,7 +22,7 @@ def restore(stuff_dest_path, source_path):
     stuff_name = os.path.basename(os.path.normpath(stuff_dest_path))
     home_path = os.path.expanduser("~")
     # Find archive
-    regexp = stuff_name + '_\d{8}(.*)?\.7z'
+    regexp = stuff_name + '_(\d{8}-\d{6})\.7z'
     backup_files = search_file(regexp, source_path)
     assert backup_files, "Backup file not found in {}: {}".format(source_path, regexp)
     backup_filepath = sorted(backup_files, reverse=True)[0]  # Use newest one
