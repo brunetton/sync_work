@@ -49,6 +49,9 @@ def backup(source_file_or_dir, dest_backup_path):
 args = docopt(__doc__.format(self_filename=os.path.basename(__file__)))
 dest_path = args['<usb_key_path>']
 
+# Mount drive
+shell("udisksctl mount -b /dev/disk/by-id/usb-Lexar_JumpDrive_2311117231-0:0-part1", check_errors=False)
+
 assert os.path.exists(os.path.expanduser("~/zim-notes"))
 assert os.path.exists(dest_path) and os.path.isdir(dest_path)
 stuff_to_sync = sync_work_constants.STUFF_TO_SYNC

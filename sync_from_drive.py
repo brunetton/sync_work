@@ -57,6 +57,9 @@ def restore(stuff_dest_path, source_path):
 args = docopt(__doc__.format(self_filename=os.path.basename(__file__)))
 source_path = args['<usb_key_path>']
 
+# Mount drive
+shell("udisksctl mount -b /dev/disk/by-id/usb-Lexar_JumpDrive_2311117231-0:0-part1")
+
 assert os.path.exists(source_path) and os.path.isdir(source_path)
 
 # Kill zim
