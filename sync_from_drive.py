@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 """
 Sync from usb key => computer
 Usage:
@@ -58,7 +57,7 @@ args = docopt(__doc__.format(self_filename=os.path.basename(__file__)))
 source_path = args['<usb_key_path>']
 
 # Mount drive
-shell("udisksctl mount -b /dev/disk/by-id/usb-Lexar_JumpDrive_2311117231-0:0-part1")
+shell("udisksctl mount -b /dev/disk/by-id/usb-Lexar_JumpDrive_2311117231-0:0-part1", check_errors=False)
 
 assert os.path.exists(source_path) and os.path.isdir(source_path)
 
